@@ -128,10 +128,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="install_mas.cpp" />
     <ClCompile Include="main.cpp" />
-    <ClCompile Include="multi_mas.cpp" />
-    <ClCompile Include="print_mas.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="task.h" />
