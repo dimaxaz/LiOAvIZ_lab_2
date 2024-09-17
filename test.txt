@@ -1,0 +1,47 @@
+void shell(int* arr)
+{
+    int n = size;
+    for (int gap = n / 2; gap > 0; gap /= 2)
+        for (int i = gap; i < n; i++) {
+            int temp = arr[i];
+            int j;
+            for (j = i; j >= gap && arr[j - gap] > temp; j -= gap)
+                arr[j] = arr[j - gap];
+            arr[j] = temp;
+        }
+}
+
+void qs(int* arr, int left, int right) //вызов функции: qs(items, 0, count-1);
+{
+    int i, j;
+    int x, y;
+
+
+
+    i = left; j = right;
+
+    /* выбор компаранда */
+    x = arr[(left + right) / 2];
+
+    do {
+        while ((arr[i] < x) && (i < right)) i++;
+        while ((x < arr[j]) && (j > left)) j--;
+
+        if (i <= j) {
+            y = arr[i];
+            arr[i] = arr[j];
+            arr[j] = y;
+            i++; j--;
+        }
+    } while (i <= j);
+
+    if (left < j) qs(arr, left, j);
+    if (i < right) qs(arr, i, right);
+}
+
+void shell(int* arr) {
+    for (int gap = size / 2; gap > 0; gap /= 2)
+        for (int i = gap; i < size; i++)
+            for (int j = i; j >= gap && arr[j - gap] > arr[j]; j -= gap)
+                swap(arr[j], arr[j - gap]);
+}
