@@ -67,47 +67,22 @@ public:
     void sort_print_mass_time(int* arr)
     {
         clock_t start_time = clock();
-        qs(arr, 0, size - 1);
+        shell (arr);
         clock_t end_time = clock();
 
         time_ = static_cast<double>(end_time - start_time) / CLOCKS_PER_SEC;
         print_time();
     }
 
-    void qs(int* items, int left, int right)
+    void shell(int* arr) 
     {
-        while (left < right)
-        {
-            int pivot = items[(left + right) / 2];
-            int i = left;
-            int j = right;
-
-            do
-            {
-                while (items[i] < pivot) i++;
-                while (pivot < items[j]) j--;
-
-                if (i <= j)
-                {
-                    std::swap(items[i], items[j]);
-                    i++;
-                    j--;
-                }
-            } while (i <= j);
-
-            // Рекурсивный вызов для двух подмассивов
-            if (j - left < right - i)
-            {
-                qs(items, left, j);
-                left = i;
-            }
-            else
-            {
-                qs(items, i, right);
-                right = j;
-            }
-        }
+        for (int gap = size / 2; gap > 0; gap /= 2)
+            for (int i = gap; i < size; i++)
+                for (int j = i; j >= gap && arr[j - gap] > arr[j]; j -= gap)
+                    swap(arr[j], arr[j - gap]);
     }
+
+   
 
     void print_time() {
 

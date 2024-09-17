@@ -39,9 +39,37 @@ void qs(int* arr, int left, int right) //вызов функции: qs(items, 0, count-1);
     if (i < right) qs(arr, i, right);
 }
 
-void shell(int* arr) {
-    for (int gap = size / 2; gap > 0; gap /= 2)
-        for (int i = gap; i < size; i++)
-            for (int j = i; j >= gap && arr[j - gap] > arr[j]; j -= gap)
-                swap(arr[j], arr[j - gap]);
-}
+ void qs(int* items, int left, int right)
+    {
+        while (left < right)
+        {
+            int pivot = items[(left + right) / 2];
+            int i = left;
+            int j = right;
+
+            do
+            {
+                while (items[i] < pivot) i++;
+                while (pivot < items[j]) j--;
+
+                if (i <= j)
+                {
+                    std::swap(items[i], items[j]);
+                    i++;
+                    j--;
+                }
+            } while (i <= j);
+
+            // Рекурсивный вызов для двух подмассивов
+            if (j - left < right - i)
+            {
+                qs(items, left, j);
+                left = i;
+            }
+            else
+            {
+                qs(items, i, right);
+                right = j;
+            }
+        }
+    }
